@@ -1,0 +1,12 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+# we need to run npm, so we need the dependencies from package.json
+COPY package.json . 
+RUN npm install -g npm@8.4.0
+RUN mkdir -p node_modules/.cache && chmod -R 777 node_modules/.cache
+
+COPY . .
+
+CMD ["npm", "run", "start"]

@@ -1,0 +1,21 @@
+version: '3'
+services:
+    react-app: #name of the container
+        build:
+            context: . # specifying where we want the files and folders to come from
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes:
+            - /app/node_modules
+            - .:/app
+
+    ## Alternative to running the npm tests
+    tests:
+        build:
+            context: . # specifying where we want the files and folders to come from
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"]
